@@ -8,7 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"time"
-	service "weather-service/service"
+	service "github.com/chainfire/weather-service/service"
 
 	"github.com/gorilla/mux"
 )
@@ -18,8 +18,13 @@ func main() {
 	flag.DurationVar(&wait, "graceful-timeout", time.Second*15, "time for connections to finish to shutdown gracefully")
 	flag.Parse()
 
+	env := &service.Env{
+		Port: "8080",
+		Host: "0.0.0.0",
+	}
+
 	r := mux.NewRouter()
-	r.HandleFunc("/weather", service.HandleGetWeather).Methods("GET")
+	r.Handle("/weather", service.Handler{env, service.GetWeather}).Methods("GET")
 
 	srv := &http.Server{
 		Addr:         "0.0.0.0:8080",
