@@ -22,8 +22,6 @@ eg `curl "http://localhost:8080/weather?lat=38.8894&lng=-77.0352"`
 
 This endpoint returns a short description of the weather for today
 
-looks up the receipt by the ID and returns an object specifying the points awarded.
-
 Example Response:
 `The day will be partly cloudy with a moderate average temperature.`
 
